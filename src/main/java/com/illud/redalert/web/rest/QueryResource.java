@@ -11,12 +11,15 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.illud.redalert.client.red_alert_microservice.api.PostResourceApi;
 import com.illud.redalert.client.red_alert_microservice.model.PostDTO;
-
+import com.illud.redalert.client.crimestopper_microservice.api.ComplaintResourceApi;
+import com.illud.redalert.client.crimestopper_microservice.model.ComplaintDTO;
 @RestController
 @RequestMapping("/Api")
 public class QueryResource {
@@ -27,6 +30,9 @@ public class QueryResource {
 	
 	@Autowired
 	PostResourceApi postResourceApi;
+	@Autowired
+ComplaintResourceApi complaintResourceApi;
+	
 	
 	@GetMapping("posts/user-id")
 	public ResponseEntity<List<PostDTO>> getAlldetailsByUserId(@PathVariable String userId,Pageable pageable){
@@ -40,5 +46,27 @@ public class QueryResource {
 		return postResourceApi.getAllDetailsByuserIdUsingGET(userId, pageable.getPageNumber(), pageable.getPageSize(), sortlist);
 		
 	}
+	/*
+	 * @GetMapping("user/{userId}/friends/complaints") public
+	 * ResponseEntity<Page<ComplaintDTO>> getAllcomplaintsOfFriends(@PathVariable
+	 * String userId,Pageable pageable){
+	 * log.debug("REST request to getAllDetailsByuserId : {}", userId);
+	 * 
+	 * 
+	 * 
+	 * return complaintResourceApi.getAllComplaintsUsingGET(eagerload, offset, page,
+	 * pageNumber, pageSize, paged, size, sort, sortSorted, sortUnsorted, unpaged)
+	 * 
+	 * }
+	 */
+	@PostMapping("/complaint")
+	public ResponseEntity<ComplaintDTO>createComplaint(@RequestBody ComplaintDTO complaintDTO){
+		log.debug("Entered into gateway method create complaint with request body "+complaintDTO);
+		return this.complaintResourceApi.createComplaintUsingPOST(complaintDTO);
+	}
+	
+	
+	
+	
 
 }

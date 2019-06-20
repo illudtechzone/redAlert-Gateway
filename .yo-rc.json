@@ -3,7 +3,7 @@
         "promptValues": {
             "packageName": "com.illud.redalert"
         },
-        "jhipsterVersion": "5.8.1",
+        "jhipsterVersion": "5.8.2",
         "applicationType": "gateway",
         "baseName": "redAlert",
         "packageName": "com.illud.redalert",
@@ -33,8 +33,8 @@
     },
     "generator-jhipster-swagger-cli": {
         "promptValues": {
-            "inputSpec": "35.225.108.188:8081/redAlert/v2/api-docs",
-            "cliName": "redalert_microservice"
+            "inputSpec": "http://35.225.108.188:8084/crimestopper/v2/api-docs",
+            "cliName": "crimestopper_microservice"
         }
     }
 }
