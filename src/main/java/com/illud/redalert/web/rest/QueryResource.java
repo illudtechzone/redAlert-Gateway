@@ -20,6 +20,8 @@ import com.illud.redalert.client.red_alert_microservice.api.PostResourceApi;
 import com.illud.redalert.client.red_alert_microservice.model.PostDTO;
 import com.illud.redalert.client.crimestopper_microservice.api.ComplaintResourceApi;
 import com.illud.redalert.client.crimestopper_microservice.model.ComplaintDTO;
+import com.illud.redalert.client.friends_microservice.api.UserControllerApi;
+import com.illud.redalert.client.friends_microservice.model.User;
 @RestController
 @RequestMapping("/Api")
 public class QueryResource {
@@ -33,6 +35,8 @@ public class QueryResource {
 	@Autowired
 ComplaintResourceApi complaintResourceApi;
 	
+	@Autowired
+	UserControllerApi userControllerApi;
 	
 	@GetMapping("posts/user-id")
 	public ResponseEntity<List<PostDTO>> getAlldetailsByUserId(@PathVariable String userId,Pageable pageable){
@@ -44,6 +48,19 @@ ComplaintResourceApi complaintResourceApi;
 		list.stream().map(x->x.toString()).forEach(sortlist::add);
 		
 		return postResourceApi.getAllDetailsByuserIdUsingGET(userId, pageable.getPageNumber(), pageable.getPageSize(), sortlist);
+		
+	}
+	@GetMapping("user/findAllFriends/{userId")
+	public ResponseEntity<List<User>> findAllFriendRequest(@PathVariable String userId){
+		log.debug("REST request to findAllFriendRequestuserId : {}", userId);
+		
+		return userControllerApi.findAllFriendRequestsUsingGET(userId);
+		
+	}
+	@GetMapping("user/{userId}")
+	public ResponseEntity<List<User>> findFriends(@PathVariable String userId){
+		log.debug("REST request to findFriendsRequestuserId : {}", userId);
+		return userControllerApi.findFriendsUsingGET(userId);
 		
 	}
 	/*
@@ -59,11 +76,14 @@ ComplaintResourceApi complaintResourceApi;
 	 * 
 	 * }
 	 */
-	@PostMapping("/complaint")
-	public ResponseEntity<ComplaintDTO>createComplaint(@RequestBody ComplaintDTO complaintDTO){
-		log.debug("Entered into gateway method create complaint with request body "+complaintDTO);
-		return this.complaintResourceApi.createComplaintUsingPOST(complaintDTO);
-	}
+	/*
+	 * @PostMapping("/complaint") public
+	 * ResponseEntity<ComplaintDTO>createComplaint(@RequestBody ComplaintDTO
+	 * complaintDTO){
+	 * log.debug("Entered into gateway method create complaint with request body "
+	 * +complaintDTO); return
+	 * this.complaintResourceApi.createComplaintUsingPOST(complaintDTO); }
+	 */
 	
 	
 	

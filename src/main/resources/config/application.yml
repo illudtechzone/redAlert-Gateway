@@ -168,3 +168,6 @@ jhipster:
 # ===================================================================
 
 # application:
+#friend microservice port info 
+friendsMicroservice:
+    url: http://35.225.108.188:8087
