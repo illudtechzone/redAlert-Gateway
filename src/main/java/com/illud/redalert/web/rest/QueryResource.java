@@ -23,7 +23,7 @@ import com.illud.redalert.client.crimestopper_microservice.model.ComplaintDTO;
 import com.illud.redalert.client.friends_microservice.api.UserControllerApi;
 import com.illud.redalert.client.friends_microservice.model.User;
 @RestController
-@RequestMapping("/Api")
+@RequestMapping("/api")
 public class QueryResource {
 	
 	private final Logger log = LoggerFactory.getLogger(QueryResource.class);
