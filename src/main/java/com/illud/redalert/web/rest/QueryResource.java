@@ -23,7 +23,7 @@ import com.illud.redalert.client.crimestopper_microservice.model.ComplaintDTO;
 import com.illud.redalert.client.friends_microservice.api.UserControllerApi;
 import com.illud.redalert.client.friends_microservice.model.User;
 @RestController
-@RequestMapping("/Api")
+@RequestMapping("/api")
 public class QueryResource {
 	
 	private final Logger log = LoggerFactory.getLogger(QueryResource.class);
@@ -38,7 +38,7 @@ ComplaintResourceApi complaintResourceApi;
 	@Autowired
 	UserControllerApi userControllerApi;
 	
-	@GetMapping("posts/user-id")
+	@GetMapping("posts/user_id")
 	public ResponseEntity<List<PostDTO>> getAlldetailsByUserId(@PathVariable String userId,Pageable pageable){
 		log.debug("REST request to getAllDetailsByuserId : {}", userId);
 		
@@ -50,14 +50,14 @@ ComplaintResourceApi complaintResourceApi;
 		return postResourceApi.getAllDetailsByuserIdUsingGET(userId, pageable.getPageNumber(), pageable.getPageSize(), sortlist);
 		
 	}
-	@GetMapping("user/findAllFriends/{userId")
+	@GetMapping("user/findAllFriendRequests/{userId}")
 	public ResponseEntity<List<User>> findAllFriendRequest(@PathVariable String userId){
 		log.debug("REST request to findAllFriendRequestuserId : {}", userId);
 		
 		return userControllerApi.findAllFriendRequestsUsingGET(userId);
 		
 	}
-	@GetMapping("user/{userId}")
+	@GetMapping("user/findFriends/{userId}")
 	public ResponseEntity<List<User>> findFriends(@PathVariable String userId){
 		log.debug("REST request to findFriendsRequestuserId : {}", userId);
 		return userControllerApi.findFriendsUsingGET(userId);
