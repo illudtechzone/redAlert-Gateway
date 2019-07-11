@@ -17,7 +17,8 @@ import com.illud.redalert.client.red_alert_microservice.api.PostResourceApi;
 import com.illud.redalert.client.red_alert_microservice.model.PostDTO;
 import com.illud.redalert.web.rest.errors.BadRequestAlertException;
 import com.illud.redalert.web.rest.util.HeaderUtil;
-
+import com.illud.redalert.client.friends_microservice.api.UserControllerApi;
+import com.illud.redalert.client.friends_microservice.model.User;
 @RestController
 @RequestMapping("/api")
 public class CommandResource {
@@ -28,6 +29,8 @@ public class CommandResource {
 	
 	@Autowired
 	PostResourceApi postResourceApi;
+	@Autowired 
+	UserControllerApi userControllerApi;
 	
 	@PostMapping("/posts/create")
 	public ResponseEntity<PostDTO> createPost(@RequestBody PostDTO postDTO) {
@@ -43,5 +46,12 @@ public class CommandResource {
 		log.debug("redAlertgateway deletePOST {pppp} :", id );
 		/* ResponseEntity<Void> result = */ 
 		return postResourceApi.deletePostUsingDELETE(id);
+	}
+	
+	@PostMapping("/user")
+	public ResponseEntity<User>createUser(@RequestBody User user){
+	
+		return userControllerApi.createUserUsingPOST(user);
+		
 	}
 }
