@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,10 +54,10 @@ public class CommandResource {
 		return users;
 		
 	}
-	@PostMapping("user/{userId}/acceptedRequest/{friendId}")
-	public ResponseEntity<User> acceptRequest(@PathVariable String userId,@PathVariable String friendId){
-		log.debug("friendMicroservicegateway acceptUserRequestPOST {pppp} :", userId, friendId );
-		ResponseEntity<User> users = userControllerApi.acceptFriendRequestUsingPOST(userId, friendId);
+	@PostMapping("user/acceptedRequest")
+	public ResponseEntity<User> acceptRequest(@RequestBody User user,@RequestBody User friend){
+		log.debug("friendMicroservicegateway acceptUserRequestPOST {pppp} :",  user.getUserId(), friend.getUserId() );
+		ResponseEntity<User> users = userControllerApi.acceptFriendRequestUsingPOST(user.getUserId(), friend.getUserId());
 		return users;
 		
 	}
@@ -79,11 +80,10 @@ public class CommandResource {
 		return userControllerApi.unFriendUsingDELETE(userId, friendId);
 		
 	}
-	@PostMapping("/user/createFriendRequest/{userId}/friend/{friendId}")
-	public ResponseEntity<Void> friendRequest(@PathVariable String userId,@PathVariable String friendId ){
-		log.debug("friendMicroservicegateway friendRequestPOST {pppp} :", userId,friendId);
-		return userControllerApi.friendRequestUsingPOST(userId, friendId);
-
+	@PostMapping("/user/createFriendRequest")
+	public ResponseEntity<Void> friendRequest(@RequestBody User user,@RequestBody User friend){
+		log.debug("friendMicroservicegateway friendRequestPOST {pppp} :", user.getUserId(),friend.getUserId());
+		return userControllerApi.friendRequestUsingPOST(user.getUserId(),friend.getUserId());
 		
 	}
 }
