@@ -54,10 +54,10 @@ public class CommandResource {
 		return users;
 		
 	}
-	@PostMapping("user/acceptedRequest")
-	public ResponseEntity<User> acceptRequest(@RequestBody User user,@RequestBody User friend){
-		log.debug("friendMicroservicegateway acceptUserRequestPOST {pppp} :",  user.getUserId(), friend.getUserId() );
-		ResponseEntity<User> users = userControllerApi.acceptFriendRequestUsingPOST(user.getUserId(), friend.getUserId());
+	@PostMapping("user/{userId}/acceptedRequest/{friendId}")
+	public ResponseEntity<User> acceptRequest(@PathVariable String userId,String friendId){
+		log.debug("friendMicroservicegateway acceptUserRequestPOST {pppp} :",  userId,friendId );
+		ResponseEntity<User> users = userControllerApi.acceptFriendRequestUsingPOST(userId, friendId);
 		return users;
 		
 	}
