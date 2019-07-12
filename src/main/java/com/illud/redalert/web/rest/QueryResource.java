@@ -63,6 +63,15 @@ ComplaintResourceApi complaintResourceApi;
 		return userControllerApi.findFriendsUsingGET(userId);
 		
 	}
+	
+	
+	@GetMapping("user/findUsers/{userId}")
+	public ResponseEntity<List<User>> findUsersByName(@PathVariable String name){
+		log.debug("REST request to find users by name : {}"+name);
+		return userControllerApi.findUserByNameUsingGET(name);
+		
+	}
+	
 	/*
 	 * @GetMapping("user/{userId}/friends/complaints") public
 	 * ResponseEntity<Page<ComplaintDTO>> getAllcomplaintsOfFriends(@PathVariable
