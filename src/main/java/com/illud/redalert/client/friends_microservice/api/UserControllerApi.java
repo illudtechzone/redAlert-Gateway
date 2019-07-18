@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-07-01T14:46:22.957+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-07-16T16:23:56.198+05:30[Asia/Kolkata]")
 
 @Api(value = "UserController", description = "the UserController API")
 public interface UserControllerApi {
@@ -41,6 +41,18 @@ public interface UserControllerApi {
         produces = "*/*", 
         method = RequestMethod.POST)
     ResponseEntity<User> acceptFriendRequestUsingPOST(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId,@ApiParam(value = "friendId",required=true) @PathVariable("friendId") String friendId);
+
+
+    @ApiOperation(value = "cancelFriendRequest", nickname = "cancelFriendRequestUsingDELETE", notes = "", response = User.class, tags={ "user-controller", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = User.class),
+        @ApiResponse(code = 204, message = "No Content"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden") })
+    @RequestMapping(value = "/apis/user/{userId}/cancelFriendRequest/{friendId}",
+        produces = "*/*", 
+        method = RequestMethod.DELETE)
+    ResponseEntity<User> cancelFriendRequestUsingDELETE(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId,@ApiParam(value = "friendId",required=true) @PathVariable("friendId") String friendId);
 
 
     @ApiOperation(value = "createUser", nickname = "createUserUsingPOST", notes = "", response = User.class, tags={ "user-controller", })
@@ -82,6 +94,42 @@ public interface UserControllerApi {
     ResponseEntity<List<User>> findAllFriendRequestsUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
 
 
+    @ApiOperation(value = "findByUserName", nickname = "findByUserNameUsingGET", notes = "", response = User.class, responseContainer = "List", tags={ "user-controller", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = User.class, responseContainer = "List"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/apis/usersByName/{name}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<List<User>> findByUserNameUsingGET(@ApiParam(value = "name",required=true) @PathVariable("name") String name);
+
+
+    @ApiOperation(value = "findFriendRequestByname", nickname = "findFriendRequestBynameUsingGET", notes = "", response = User.class, responseContainer = "List", tags={ "user-controller", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = User.class, responseContainer = "List"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/apis/{userId}/friendRequestByName/{name}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<List<User>> findFriendRequestBynameUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId,@ApiParam(value = "name",required=true) @PathVariable("name") String name);
+
+
+    @ApiOperation(value = "findFriendsByname", nickname = "findFriendsBynameUsingGET", notes = "", response = User.class, responseContainer = "List", tags={ "user-controller", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = User.class, responseContainer = "List"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/apis/{userId}/friendsByName/{name}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<List<User>> findFriendsBynameUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId,@ApiParam(value = "name",required=true) @PathVariable("name") String name);
+
+
     @ApiOperation(value = "findFriends", nickname = "findFriendsUsingGET", notes = "", response = User.class, responseContainer = "List", tags={ "user-controller", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = User.class, responseContainer = "List"),
@@ -92,6 +140,18 @@ public interface UserControllerApi {
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<List<User>> findFriendsUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
+
+
+    @ApiOperation(value = "findOthersByname", nickname = "findOthersBynameUsingGET", notes = "", response = User.class, responseContainer = "List", tags={ "user-controller", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = User.class, responseContainer = "List"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/apis/{userId}/othersByName/{name}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<List<User>> findOthersBynameUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId,@ApiParam(value = "name",required=true) @PathVariable("name") String name);
 
 
     @ApiOperation(value = "findUserByName", nickname = "findUserByNameUsingGET", notes = "", response = User.class, responseContainer = "List", tags={ "user-controller", })

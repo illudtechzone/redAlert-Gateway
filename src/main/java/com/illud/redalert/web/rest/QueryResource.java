@@ -72,6 +72,38 @@ ComplaintResourceApi complaintResourceApi;
 		
 	}
 	
+	@GetMapping("/usersByName/{name}")
+	public List<User>findByUserName(@PathVariable String name){
+		log.debug("requets to find all user with name "+name);
+		return userControllerApi.findByUserNameUsingGET(name).getBody();
+		
+	}
+	
+	@GetMapping("/{userId}/friendRequestByName/{name}")
+	public List<User>findFriendRequestByname(@PathVariable String userId,@PathVariable String name){
+		log.debug("requets to find all friendRequest with name "+name);
+		return userControllerApi.findFriendRequestBynameUsingGET(userId, name).getBody();
+		
+		
+	}
+	
+	@GetMapping("/{userId}/friendsByName/{name}")
+	public List<User>findFriendsByname(@PathVariable String userId,@PathVariable String name){
+		log.debug("requets to find all friendRequest with name "+name);
+		return userControllerApi.findFriendsBynameUsingGET(userId, name).getBody();
+		
+	}
+	
+	//rest method to find people that are not in friendlist or friend request list
+	@GetMapping("/{userId}/othersByName/{name}")
+	public List<User>findOthersByname(@PathVariable String userId,@PathVariable String name){
+		log.debug("requets to find all friendRequest with name "+name);
+		return userControllerApi.findOthersBynameUsingGET(userId, name).getBody();
+	}
+	
+	
+	
+	
 	/*
 	 * @GetMapping("user/{userId}/friends/complaints") public
 	 * ResponseEntity<Page<ComplaintDTO>> getAllcomplaintsOfFriends(@PathVariable
