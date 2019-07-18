@@ -65,7 +65,7 @@ ComplaintResourceApi complaintResourceApi;
 	}
 	
 	
-	@GetMapping("user/findUsers/{userId}")
+	@GetMapping("user/findUsers/{name}")
 	public ResponseEntity<List<User>> findUsersByName(@PathVariable String name){
 		log.debug("REST request to find users by name : {}"+name);
 		return userControllerApi.findUserByNameUsingGET(name);
