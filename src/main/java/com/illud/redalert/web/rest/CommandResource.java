@@ -80,10 +80,10 @@ public class CommandResource {
 		return userControllerApi.unFriendUsingDELETE(userId, friendId);
 		
 	}
-	@PostMapping("/user/createFriendRequest")
-	public ResponseEntity<Void> friendRequest(@RequestBody User user,@RequestBody User friend){
-		log.debug("friendMicroservicegateway friendRequestPOST {pppp} :", user.getUserId(),friend.getUserId());
-		return userControllerApi.friendRequestUsingPOST(user.getUserId(),friend.getUserId());
+	@PostMapping("/user/{userId}/createFriendRequest/{friendId}")
+	public ResponseEntity<Void> friendRequest(@PathVariable String userId,@PathVariable String friendId){
+		log.debug("friendMicroservicegateway friendRequestPOST {pppp} :", userId,friendId);
+		return userControllerApi.friendRequestUsingPOST(userId,friendId);
 		
 	}
 }
